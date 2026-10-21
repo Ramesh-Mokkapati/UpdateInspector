@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.configuration }} x64
+    # Visual Studio 2022 with the C++ ATL/MFC component (needed for MFC) and the v143 toolset.
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [ Debug, Release ]
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '[17.0,18.0)'
+
+      # The project compiles at /W4 with /WX and links with /WX; -warnaserror also fails
+      # the build on any MSBuild or resource-compiler warning, so a green run means zero warnings.
+      - name: Build
+        run: >
+          msbuild UpdateInspector.sln
+          /t:Rebuild
+          /p:Configuration=${{ matrix.configuration }}
+          /p:Platform=x64
+          /m /nologo /v:minimal
+          -warnaserror
+
+      - name: Upload UpdateInspector.exe
+        if: matrix.configuration == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: UpdateInspector-x64
+          path: bin/Release/UpdateInspector.exe
+          if-no-files-found: error

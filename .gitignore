@@ -1,0 +1,24 @@
+# Visual Studio
+.vs/
+*.user
+*.aps
+*.VC.db
+*.VC.opendb
+ipch/
+
+# Build output (bin\ and obj\ sit next to the .sln)
+bin/
+obj/
+x64/
+[Dd]ebug/
+[Rr]elease/
+
+# Compiler and linker by-products
+*.obj
+*.pdb
+*.ipdb
+*.iobj
+*.ilk
+*.tlog
+*.lastbuildstate
+*.log

@@ -1,0 +1,46 @@
+#include "resource.h"
+#include "afxres.h"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+// First icon in the file, so Explorer and the taskbar use it. Regenerate with res\make-icon.ps1.
+IDR_MAINFRAME           ICON                    "res\\UpdateInspector.ico"
+
+IDD_MAIN DIALOGEX 0, 0, 640, 380
+STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_CLIPCHILDREN
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Update Inspector"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    CONTROL         "", IDC_TABS, "SysTabControl32", WS_TABSTOP, 7, 7, 626, 16
+    CONTROL         "", IDC_LIST, "SysListView32", LVS_REPORT | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP, 7, 24, 626, 320
+    LTEXT           "", IDC_STATUS, 7, 358, 330, 10, SS_ENDELLIPSIS | SS_NOPREFIX
+    PUSHBUTTON      "&Scan", IDC_SCAN, 350, 354, 60, 16
+    PUSHBUTTON      "&Install Selected", IDC_INSTALL, 300, 354, 80, 16, NOT WS_VISIBLE
+    PUSHBUTTON      "Action", IDC_ACTION, 415, 354, 90, 16
+    PUSHBUTTON      "&Export CSV...", IDC_EXPORT, 510, 354, 60, 16
+    PUSHBUTTON      "Close", IDCANCEL, 575, 354, 58, 16
+END
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "Update Inspector - software, driver and update scanner"
+            VALUE "FileVersion", "1.0.0.0"
+            VALUE "ProductName", "Update Inspector"
+            VALUE "ProductVersion", "1.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
