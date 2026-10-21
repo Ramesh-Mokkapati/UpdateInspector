@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
         with:
           vs-version: '[17.0,18.0)'
 
@@ -41,7 +41,7 @@ jobs:
 
       - name: Upload UpdateInspector.exe
         if: matrix.configuration == 'Release'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: UpdateInspector-x64
           path: bin/Release/UpdateInspector.exe
